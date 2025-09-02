@@ -23,7 +23,7 @@ export default function CareerReview() {
   
   const ACCOUNT_TABS = [
     {
-      value: "Career Counselling",
+      value: "Career Details",
       icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
       component: <CareerCounselling/>,
     },
