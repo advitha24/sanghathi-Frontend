@@ -13,7 +13,7 @@ import {
   RHFSelect,
 } from "../../components/hook-form";
 
-export default function CareerCounselling() {
+export default function CareerDetails() {
   const { enqueueSnackbar } = useSnackbar();
   const { user } = useContext(AuthContext);
   const [searchParams] = useSearchParams();
