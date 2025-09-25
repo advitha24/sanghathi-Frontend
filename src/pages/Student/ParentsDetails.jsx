@@ -71,8 +71,7 @@ export default function ParentsDetails() {
       }
       
       const response = await api.get(`/parent-details/${userId}`);
-      console.log("Parent details full response:", response);
-      console.log("Parent details response.data:", response.data);
+      console.log("Parent details full response:", JSON.stringify(response.data, null, 2));
       
       // Extract parent details - check multiple possible response structures
       let parentDetails = null;
@@ -94,37 +93,20 @@ export default function ParentsDetails() {
       console.log("Extracted parent details:", parentDetails);
       
       if (parentDetails) {
-        // Use all keys from DEFAULT_VALUES to ensure we're not missing any fields
+        // Prepare form data with only DEFAULT_VALUES keys
+        const formData = { ...DEFAULT_VALUES };
         Object.keys(DEFAULT_VALUES).forEach((key) => {
-          if (parentDetails[key] !== undefined) {
-            console.log(`Setting field ${key} to value: ${parentDetails[key]}`);
-            setValue(key, parentDetails[key] || "");
-          }
+          formData[key] = parentDetails[key] || "";
         });
-        
-        // If the parentDetails object format exactly matches our form, use reset for a complete update
-        if (typeof parentDetails === 'object' && 
-            Object.keys(parentDetails).length > 0 && 
-            Object.keys(parentDetails).every(key => DEFAULT_VALUES.hasOwnProperty(key) || 
-                                              ['_id', 'id', '_v', '__v', 'createdAt', 'updatedAt', 'userId'].includes(key))) {
-          console.log("Setting all form values at once with reset()");
-          // Filter out non-form fields
-          const formData = {};
-          Object.keys(DEFAULT_VALUES).forEach(key => {
-            formData[key] = parentDetails[key] || "";
-          });
-          reset(formData);
-        }
+
+        console.log("Final formData to reset:", formData);
+        reset(formData);
+        setIsDataFetched(true);
       }
     } catch (error) {
       console.error("Error fetching parent details:", error);
-      // if (error.response?.status !== 404) {
-      //   enqueueSnackbar("Error fetching parent details", { variant: "error" });
-      // }
-    } finally {
-      setIsDataFetched(true);
     }
-  }, [user?._id, menteeId, setValue, reset, enqueueSnackbar]);
+  }, [user?._id, menteeId, reset, enqueueSnackbar]);
 
   useEffect(() => {
     fetchParentDetails();
