@@ -1,13 +1,13 @@
 import { capitalCase } from "change-case";
 import { useState } from "react";
 // @mui
-import { 
-  Container, 
-  Tab, 
-  Box, 
-  Tabs, 
+import {
+  Container,
+  Tab,
+  Box,
+  Tabs,
   Paper,
-  Typography 
+  Typography
 } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
 
@@ -26,6 +26,9 @@ import AddIat from "./AddIat";
 import AddAttendance from "./AddAttendance";
 import AddStudents from "./AddStudents";
 import AddMarks from "../Scorecard/AddMarks";
+import AddTylMarks from "./AddTylMarks";
+import AddMoocDetails from "./AddMoocDetails";
+import AddMiniProjectDetails from "./AddMiniProjectDetails";
 import React from "react";
 
 // ----------------------------------------------------------------------
@@ -74,8 +77,22 @@ export default function Data() {
         />
       ),
     },
+    {
+      value: "Add TYL Marks",
+      icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
+      component: <AddTylMarks />,
+    },
+    {
+      value: "Add MOOC Details",
+      icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
+      component: <AddMoocDetails />,
+    },
+    {
+      value: "Add MiniProject Details",
+      icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
+      component: <AddMiniProjectDetails />,
+    },
   ];
-
   return (
     <Page title="User: Account Settings">
       <Container maxWidth="lg">
@@ -85,7 +102,7 @@ export default function Data() {
             p: 3,
             mb: 4,
             borderRadius: 2,
-            backgroundColor: isLight 
+            backgroundColor: isLight
               ? 'rgba(255, 255, 255, 0.8)'
               : alpha(theme.palette.background.paper, 0.8),
             backdropFilter: 'blur(8px)',
@@ -94,17 +111,17 @@ export default function Data() {
               : '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
           }}
         >
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               textAlign: 'center',
               mb: 3
             }}
           >
-            <Typography 
+            <Typography
               variant="h4"
               sx={{
                 fontWeight: 'bold',
-                background: isLight 
+                background: isLight
                   ? `-webkit-linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`
                   : `-webkit-linear-gradient(45deg, ${theme.palette.info.main}, ${theme.palette.info.dark})`,
                 WebkitBackgroundClip: 'text',
@@ -114,9 +131,9 @@ export default function Data() {
             >
               Data Management
             </Typography>
-            
-            <Typography 
-              variant="body1" 
+
+            <Typography
+              variant="body1"
               color="text.secondary"
               sx={{ maxWidth: 600, mx: 'auto' }}
             >
